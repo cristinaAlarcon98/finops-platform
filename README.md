@@ -15,7 +15,7 @@ event-driven architecture, failure recovery, observability, and scalability.
 
 ## Architecture
 
-### Week 1 — Pure Java + In-Memory Queue
+### Phase 1 — Pure Java + In-Memory Queue
 Producer/Consumer pattern with a FIFO queue.
 - `Operation` — immutable record modeling a financial operation
 - `OperationProducer` — creates and enqueues operations
