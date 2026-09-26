@@ -1,14 +1,16 @@
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.Currency;
-import java.util.Queue;
 import java.util.UUID;
+import java.util.concurrent.BlockingQueue;
 
 public class OperationProducer {
-    private final Queue<Operation> queue;
+    private final BlockingQueue<Operation> queue;
+    private final int numberOfConsumers;
 
-    public OperationProducer(Queue<Operation> queue) {
+    public OperationProducer(BlockingQueue<Operation> queue, int numberOfConsumers) {
         this.queue = queue;
+        this.numberOfConsumers = numberOfConsumers;
     }
 
     public void submit(OperationType type, BigDecimal amount, Currency currency, UUID sourceAccount,
@@ -23,6 +25,12 @@ public class OperationProducer {
             throw new IllegalStateException("Operation could not be enqueued: " + operation.id());
         }
 
+    }
+
+    public void sendPoisonPills() {
+        for (int i = 0; i < numberOfConsumers; i++) {
+            queue.offer(Operation.POISON_PILL);
+        }
     }
 
 }

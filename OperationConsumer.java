@@ -1,17 +1,13 @@
-import java.util.Queue;
+import java.util.concurrent.BlockingQueue;
 
-public class OperationConsumer {
-    private final Queue<Operation> queue;
+public class OperationConsumer implements Runnable {
+    private final BlockingQueue<Operation> queue;
 
-    public OperationConsumer(Queue<Operation> queue) {
+    public OperationConsumer(BlockingQueue<Operation> queue) {
         this.queue = queue;
     }
 
-    public void process() {
-        Operation operation = queue.poll();
-        if (operation == null) {
-            return;
-        }
+    public void process(Operation operation) {
 
         operation = new Operation(
                 operation.id(),
@@ -44,6 +40,21 @@ public class OperationConsumer {
         );
 
         System.out.println("Operation " + operation.id() + " is completed!");
+
+    }
+
+    public void run() {
+        while (true) {
+            try {
+                Operation operation = queue.take();
+                if (operation == Operation.POISON_PILL)
+                    break;
+                process(operation);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                break;
+            }
+        }
 
     }
 }
