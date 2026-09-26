@@ -1,0 +1,31 @@
+# Compiled class files
+*.class
+
+# Package files
+*.jar
+*.war
+*.ear
+
+# Build directories
+target/
+build/
+out/
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Personal notes
+APUNTES.md
+
+# Logs
+*.log
+
+# Environment variables
+.env
