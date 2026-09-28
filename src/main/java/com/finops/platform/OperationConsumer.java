@@ -1,3 +1,5 @@
+package com.finops.platform;
+
 import java.util.concurrent.BlockingQueue;
 
 public class OperationConsumer implements Runnable {

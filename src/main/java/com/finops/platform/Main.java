@@ -1,3 +1,5 @@
+package com.finops.platform;
+
 import java.util.UUID;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
