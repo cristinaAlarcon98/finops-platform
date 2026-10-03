@@ -6,6 +6,8 @@ import java.util.Currency;
 import java.util.UUID;
 import java.util.concurrent.BlockingQueue;
 
+import org.springframework.stereotype.Component;
+
 public class OperationProducer {
     private final BlockingQueue<Operation> queue;
     private final int numberOfConsumers;
